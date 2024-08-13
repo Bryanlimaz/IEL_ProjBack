@@ -9,4 +9,4 @@ app.use(router);
 // app.use(routerUser);
 // app.use(routerAuth);
 
-module.exports = app;
+module.exports = app
