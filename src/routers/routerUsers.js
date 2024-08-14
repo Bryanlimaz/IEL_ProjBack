@@ -9,6 +9,7 @@ router.get(
   middlewareUsers.getUserMiddleware,
   usersController.getUserById
 );
+
 router.post(
   "/users",
   middlewareUsers.insertUserMiddleware,
