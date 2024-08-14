@@ -2,12 +2,11 @@
   "name": "projback",
   "version": "1.0.0",
   "description": "Project proposed for the completion of the second module of the Dev. FullStack course of the \"Geração Tech\" program of the State government.",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "main": "server.js",
-    "start": "node src/server.js",
-    "dev": "nodemon src/server.js"
+    "start": "node ./src/server.js",
+    "dev": "nodemon ./src/server.js"
   },
   "author": "",
   "license": "ISC",
