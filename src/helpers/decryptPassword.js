@@ -4,7 +4,7 @@ const crypto = require ('crypto')
 dotenv.config()
 
 function decryptedPassword (encryptedHex, ivHex) {
-    const key = process.env._SECRET_KEY
+    const key = process.env.SECRET_KEY
 
     const hash = crypto
         .createHash ('sha256')
