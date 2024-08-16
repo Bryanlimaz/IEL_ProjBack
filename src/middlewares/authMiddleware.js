@@ -14,7 +14,7 @@ async function loginMiddleware(req, res, next) {
         return res.status(404).send("Usuário não encontrado");
     }
 
-    const decrypted = await decryptPassword(user.password);
+    const decrypted = await decryptPassword(user.senha);
 
     if (password !== decrypted) {
         return res.status(400).send("Senha inválida");

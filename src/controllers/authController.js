@@ -9,7 +9,8 @@ async function login(req, res){
 
     const token = jwt.sign({id, email}, jwSecret,{ expiresIn: '1h'});
 
+    console.log (token)
     return res.send(token);
 }
 
-module.exports = {login}
+module.exports = login
