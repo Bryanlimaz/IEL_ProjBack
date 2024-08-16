@@ -7,7 +7,7 @@ async function insertUserMiddleware(req, res, next) {
     return res.status(400).send("Dados Inválidos");
   }
 
-  if (!nome.includes("1", "2", "3", "4", "5", "6", "7", "8", "9") || !sobrenome.includes("1", "2", "3", "4", "5", "6", "7", "8", "9")) {
+  if (nome.includes("1", "2", "3", "4", "5", "6", "7", "8", "9") || sobrenome.includes("1", "2", "3", "4", "5", "6", "7", "8", "9")) {
     return res.status(400).send("Nome ou Sobrenome Inválidos");
   }
 
