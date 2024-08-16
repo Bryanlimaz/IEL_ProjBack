@@ -11,13 +11,6 @@ async function insertUserMiddleware(req, res, next) {
     return res.status(400).send("A senha deve conter pelo menos 8 caracteres");
   }
 
-  const caractereEspecial = /[!@#$%^&*()_+{}\[\]:;"'<>,.?~`\\/-]/;
-  if (!caractereEspecial.test(senha)) {
-    return res
-      .status(400)
-      .send("A senha deve conter pelo menos um caractere especial");
-  }
-
   if (!email.includes("@") || !email.includes(".")) {
     return res.status(400).send("Email Inválido");
   }

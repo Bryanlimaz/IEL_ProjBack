@@ -1,10 +1,13 @@
 const userModel = require("../models/usersModel");
+const encryptPassword = require("../helpers/encryptPassword");
 
 async function createUser(req, res) {
   const { nome, sobrenome, email, senha } = req.body;
 
+  const pass = await encryptPassword(senha);
+
   try {
-    await userModel.insertUserModel(nome, sobrenome, email, senha);
+    await userModel.insertUserModel(nome, sobrenome, email, pass);
   } catch (error) {
     return res.status(400).send(error.message);
   }
