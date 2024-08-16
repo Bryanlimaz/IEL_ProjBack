@@ -21,12 +21,28 @@ async function modelCreatePokemon (nome, tipo, pv, custo_retirada, evolucao, img
         )
     `)
 
-    return // Não precisarei returnar nada pois não estou fazendo nada além de adicionar dados no DB.
+    return // Não precisarei retornar nada pois não estou fazendo nada além de adicionar dados no DB.
+}
+
+async function modelUpdatePokemon(nome, tipo, pv, custo_retirada, evolucao, img){
+    await connection.query(`
+        UPDATE pokemons (nome, tipo, pv, custo_retirada, evolucao, img)
+        SET nome = '${nome}',
+            tipo = ${tipo},
+            pv =  ${pv},
+            custo_retirada =  ${custo_retirada},
+            evolucao =  ${evolucao},
+            img = '${img}'
+        WHERE id = ${id}
+    `)
+
+    return;
 }
 
 
 
 module.exports = {
     modelGetAllPokemons,
-    modelCreatePokemon
+    modelCreatePokemon,
+    modelUpdatePokemon
 }
