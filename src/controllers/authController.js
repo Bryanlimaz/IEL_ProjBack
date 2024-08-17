@@ -1,3 +1,8 @@
+// O que falta:
+// 1- Validação de req.user
+// 2- Tratamento de erros
+// 3- Resposta JSON 
+
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 dotenv.config();

@@ -4,7 +4,7 @@ const varianteController = require ('../controllers/varianteController');
 const validateToken = require ('../helpers/validateToken')
 const decryptedPassword = require ('../helpers/decryptPassword')
 
-router.get ('/variantes', varianteController.getAllVariantes);
+router.get ('/variantes', validateToken, decryptedPassword, varianteController.getAllVariantes);
 
 
 module.exports = router;
