@@ -37,7 +37,6 @@ async function modelUpdatePokemon(nome, tipo, pv, custo_retirada, evolucao, img)
     `)
 
     return;
-    return // Não precisarei returnar nada pois não estou fazendo nada além de adicionar dados no DB.
 }
 
 
@@ -46,5 +45,4 @@ module.exports = {
     modelGetAllPokemons,
     modelCreatePokemon,
     modelUpdatePokemon,
-    modelCreatePokemon
 }
