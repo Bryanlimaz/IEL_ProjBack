@@ -1,3 +1,7 @@
+// O que falta:
+// 1- Tratamento de Erros
+// 2- Validação de Dados 
+
 const authModel = require("../models/authModel");
 const decryptPassword = require("../helpers/decryptPassword");
 

@@ -1,3 +1,6 @@
+// O que falta:
+// 1- Tratamento de Erros na Conexão
+
 const { Pool } = require('pg');
 const dotenv = require ('dotenv')
 

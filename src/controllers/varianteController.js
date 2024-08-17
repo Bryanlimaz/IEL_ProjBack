@@ -1,3 +1,7 @@
+// O que falta:
+// 1- Validação de Erros
+// 2- Validação de Dados 
+
 const variantesModel = require ('../models/varianteModel');
 
 async function getAllVariantes(req, res) {

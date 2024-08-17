@@ -1,3 +1,7 @@
+// O que falta:
+// 1- Tratamento de Erros
+// 2- Retorno de Resultados
+
 const connection = require("./connection");
 
 async function insertUserModel(nome, sobrenome, email, senha) {
