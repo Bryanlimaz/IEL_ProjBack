@@ -4,6 +4,9 @@ const varianteController = require ('../controllers/varianteController');
 const varianteModel = require ('../models/varianteModel');
 const pokemonsController = require ('../controllers/pokemonsController');
 const pokemonsMiddleware = require ('../middlewares/pokemonsMiddleware');
+const varianteModel = require ('../models/varianteModel');
+const pokemonsController = require ('../controllers/pokemonsController');
+const pokemonsMiddleware = require ('../middlewares/pokemonsMiddleware');
 const validateToken = require ('../helpers/validateToken')
 const decryptedPassword = require ('../helpers/decryptPassword')
 

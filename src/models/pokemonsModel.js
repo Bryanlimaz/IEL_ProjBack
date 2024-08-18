@@ -44,5 +44,5 @@ async function modelUpdatePokemon(nome, tipo, pv, custo_retirada, evolucao, img)
 module.exports = {
     modelGetAllPokemons,
     modelCreatePokemon,
-    modelUpdatePokemon
+    modelUpdatePokemon,
 }
