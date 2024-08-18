@@ -6,7 +6,7 @@ const usersModel = require("../models/usersModel");
 
 async function insertUserMiddleware(req, res, next) {
   const { nome, sobrenome, email, senha } = req.body;
-  const temNumero = /\d/
+  const temNumero = /\d/ //Limitador Regex
   
   if (!nome || !sobrenome || !email || !senha) {
     return res.status(400).send("Dados Inválidos");
