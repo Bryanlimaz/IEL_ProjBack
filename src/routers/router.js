@@ -18,5 +18,4 @@ router.post ('/pokemons', validadeMiddleware, pokemonsMiddleware.postPokemonMidd
 router.put ('/pokemons/:id', validadeMiddleware, pokemonsMiddleware.putPokemonMiddleware, pokemonsController.putPokemon);
 router.delete ('/pokemons/:id', validadeMiddleware, pokemonsMiddleware.deletePokemonMiddleware, pokemonsController.deletePokemon);
 
-
 module.exports = router;

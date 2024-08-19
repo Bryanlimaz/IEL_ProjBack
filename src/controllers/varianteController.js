@@ -25,4 +25,4 @@ async function postVariante (req, res) {
 module.exports = {
     getAllVariantes,
     postVariante
-}
+};
