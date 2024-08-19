@@ -14,14 +14,12 @@ function encryptPassword (password) {
 
     const iv = crypto.randomBytes (16)
 
-    const cipher = 
-        crypto.createCipheriv ('aes-256-cbc', hash, iv)
+    const cipher = crypto.createCipheriv ('aes-256-cbc', hash, iv)
 
     let encrypted = cipher.update (password)
     encrypted = Buffer.concat ([encrypted, cipher.final()])
     
-    const pass =
-        iv.toString ('hex') + ':' + encrypted.toString ('hex')
+    const pass = iv.toString ('hex') + ':' + encrypted.toString ('hex')
 
     return pass
 }

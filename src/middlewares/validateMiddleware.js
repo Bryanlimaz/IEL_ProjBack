@@ -1,13 +1,31 @@
-// const express = require ('express')
-// const router = express.Router()
-const encryptPassword = require ('../helpers/encryptPassword')
-const validateMiddleware = require ('../helpers/validateMiddleware')
+const validate = require('../helpers/validateToken')
 
-router.post ('/register', validateMiddleware, (requisition, response) => {
-    const { password } = requisition.body
-    const encryptedPassword = encryptPassword (password)
+async function validateMiddleware (requisition, response, next) {
+    const { authorization } = requisition.headers
 
-    response.status (200).json ({ message: 'Senha registrada com sucesso!' })
-});
+    // console.log(authorization)
+
+    const verifica = await validate(authorization)
+
+    if(!verifica){
+        return response.status(401).send('Falhou')
+        
+    }
+
+    next()
+}
 
 module.exports = validateMiddleware
+
+// const encryptPassword = require ('../helpers/encryptPassword')
+
+// async function validateMiddleware (requisition, response, next) {
+//     const { password } = requisition.body
+//     const encryptedPassword = encryptPassword (password)
+
+//     response.status (200).json ({ message: 'Senha registrada com sucesso!' })
+
+//     next()
+// }
+
+// module.exports = validateMiddleware
