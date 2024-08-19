@@ -10,6 +10,8 @@ if (!JWTSecret) {
 }
 
 async function validateToken (token) {
+
+
     try {
         JWT.verify (token, JWTSecret)
 

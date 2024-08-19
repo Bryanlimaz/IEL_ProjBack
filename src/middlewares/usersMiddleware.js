@@ -1,7 +1,3 @@
-// O que falta:
-// 1- Tratamento de Erros
-// 2- Validação de Dados 
-
 const usersModel = require("../models/usersModel");
 
 async function insertUserMiddleware(req, res, next) {

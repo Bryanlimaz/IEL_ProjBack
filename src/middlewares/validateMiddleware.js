@@ -1,19 +1,15 @@
 const encryptPassword = require ('../helpers/encryptPassword')
+const validate = require('../helpers/validateToken')
 
 async function validateMiddleware (requisition, response, next) {
-    const { password } = requisition.body
+    const { authorization } = requisition.headers
 
-    if (!password) {
-        return response.status (400).json ({ message: 'Senha é obrigatória!' })
-    }
+    console.log(authorization)
 
-    try {
-        const encryptedPassword = encryptPassword (password)
-        response.status (200).json 
-            ({ message: 'Senha registrada com sucesso!', encryptedPassword })
-    } catch (error) {
-        return response.status (500).json 
-            ({ message: 'Erro ao criptografar a senha', error: error.message })
+    const verifica = validate(authorization)
+
+    if(!verifica){
+        response.status(401).send('Falhou')
     }
 
     next()

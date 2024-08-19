@@ -1,8 +1,3 @@
-// O que falta:
-// 1- Validação de dados
-// 2- Tratamento de erros
-// 3- Status de Resposta Consistente 
-
 const userModel = require("../models/usersModel");
 const encryptPassword = require("../helpers/encryptPassword");
 
