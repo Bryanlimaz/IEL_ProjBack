@@ -3,7 +3,11 @@ const connection = require ('./connection');
 async function modelGetAllPokemons() {
     
     const pokemons = await connection.query(
-        'SELECT * FROM pokemons'
+        // 'SELECT * FROM pokemons'
+        `SELECT po.id, po.nome, po.pv,  r.custo, e.lvl, po.img, po.fraqueza FROM pokemons po
+        
+        INNER JOIN retirada r ON po.custo_retirada = r.id
+        INNER JOIN evolucoes e ON po.evolucao = e.id`
     )
 
     return pokemons.rows;

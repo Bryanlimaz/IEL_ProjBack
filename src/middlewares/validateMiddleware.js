@@ -1,15 +1,15 @@
-const encryptPassword = require ('../helpers/encryptPassword')
 const validate = require('../helpers/validateToken')
 
 async function validateMiddleware (requisition, response, next) {
     const { authorization } = requisition.headers
 
-    console.log(authorization)
+    // console.log(authorization)
 
-    const verifica = validate(authorization)
+    const verifica = await validate(authorization)
 
     if(!verifica){
-        response.status(401).send('Falhou')
+        return response.status(401).send('Falhou')
+        
     }
 
     next()
