@@ -1,15 +1,21 @@
 const express = require ('express');
 const router = express.Router();
 const varianteController = require ('../controllers/varianteController');
-const varianteModel = require ('../models/varianteModel');
+const varianteMiddleware = require ('../middlewares/varianteMiddleware');
 const pokemonsController = require ('../controllers/pokemonsController');
 const pokemonsMiddleware = require ('../middlewares/pokemonsMiddleware');
 const validateToken = require ('../helpers/validateToken')
 const decryptedPassword = require ('../helpers/decryptPassword')
 
-router.get ('/variantes', validateToken, decryptedPassword, varianteController.getAllVariantes);
+router.get ('/variantes', varianteController.getAllVariantes);
+router.post ('/variantes', validateToken, decryptedPassword, varianteController.postVariante);
 router.get ('/pokemons', pokemonsController.getAllPokemons);
-router.post ('/pokemons', pokemonsController.postPokemon);
+// router.get ('/pokemons/:id', pokemonsController.getPokemonByID);
+// router.get ('/pokemons/:nome', pokemonsController.getPokemonByName);
+router.get('/pokemons/:param', pokemonsMiddleware.getPokemonByIdOrNameMiddleware, pokemonsController.getPokemon);
+router.post ('/pokemons', /*validateToken, decryptedPassword,*/ pokemonsMiddleware.postPokemonMiddleware, pokemonsController.postPokemon);
+router.put ('/pokemons/:id', /*validateToken, decryptedPassword,*/ pokemonsMiddleware.putPokemonMiddleware, pokemonsController.putPokemon);
+router.delete ('/pokemons/:id', /*validateToken, decryptedPassword,*/ pokemonsMiddleware.deletePokemonMiddleware, pokemonsController.deletePokemon);
 
 
 module.exports = router;

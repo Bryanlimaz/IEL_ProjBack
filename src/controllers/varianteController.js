@@ -1,15 +1,28 @@
-// O que falta:
-// 1- Validação de Erros
-// 2- Validação de Dados 
-
 const variantesModel = require ('../models/varianteModel');
 
 async function getAllVariantes(req, res) {
-    const variantes = await variantesModel.modelGetAllVariantes();
+    try {
+        var variantes = await variantesModel.modelGetAllVariantes();
+    } catch (error) {
+        return res.status(400).send(error.message);
+    }
 
     return res.send(variantes);
 }
 
+async function postVariante (req, res) {
+    const { nome } = req.body;
+
+    try {
+        await variantesModel.modelCreateVariante(nome);
+    } catch (error) {
+        return res.status(400).send(error.message);
+    }
+
+    res.status(201).send("🟢 Variante de Pokémon adicionada com sucesso! 😁👍");
+}
+
 module.exports = {
-    getAllVariantes
+    getAllVariantes,
+    postVariante
 }

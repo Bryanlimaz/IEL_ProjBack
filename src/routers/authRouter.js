@@ -6,7 +6,7 @@ const authMiddleware = require("../middlewares/authMiddleware");
 
 router.post(
     '/login',
-    authMiddleware.loginMiddleware, 
+    // authMiddleware.loginMiddleware, 
     authController
     );
 
