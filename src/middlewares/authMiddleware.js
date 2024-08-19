@@ -1,37 +1,39 @@
 // O que falta:
 // 1- Tratamento de Erros
-// 2- Validação de Dados 
 
 const authModel = require("../models/authModel");
 const decryptPassword = require("../helpers/decryptPassword");
 
 async function loginMiddleware(req, res, next) {
-    const {email, password} = req.body;
+    const { email, password } = req.body;
 
     if (!email || !password) {
-        return res.status(400).send("Dados inválidos")
+        return res.status(400).send("Dados inválidos");
     }
 
-    const user = await authModel.getUserByEmail(email);
+    try {
+        const user = await authModel.getUserByEmail(email);
 
-    if (!user) {
-        return res.status(404).send("Usuário não encontrado");
+        if (!user) {
+            return res.status(404).send("Usuário não encontrado");
+        }
+
+        const decrypted = await decryptPassword(user.senha);
+
+        if (password !== decrypted) {
+            return res.status(400).send("Senha inválida");
+        }
+
+        const data = {
+            id: user.id,
+            email: user.email
+        };
+
+        req.user = data;
+        next();
+    } catch (error) {
+        return res.status(500).json({ error: 'Erro ao processar login' });
     }
-
-    const decrypted = await decryptPassword(user.senha);
-
-    if (password !== decrypted) {
-        return res.status(400).send("Senha inválida");
-    }
-
-    const data = {
-        id: user.id,
-        email: user.email
-    }
-
-    req.user = data;
-
-    next();
 }
 
 module.exports = {

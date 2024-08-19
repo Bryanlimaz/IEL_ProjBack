@@ -5,11 +5,13 @@
 const connection = require ('./connection');
 
 async function modelGetAllVariantes() {
-    const variantes = await connection.query(
-        'SELECT * FROM variante'
-    );
-
-    return variantes.rows;
+    try {
+        const variantes = await connection.query('SELECT * FROM variante');
+        return variantes.rows;
+    } catch (error) {
+        console.error('Erro ao buscar variantes:', error);
+        throw new Error('Erro ao buscar variantes');
+    }
 }
 
 async function modelCreateVariante(nome) {

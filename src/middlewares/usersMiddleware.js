@@ -1,6 +1,5 @@
 // O que falta:
 // 1- Tratamento de Erros
-// 2- Validação de Dados 
 
 const usersModel = require("../models/usersModel");
 
@@ -12,10 +11,9 @@ async function insertUserMiddleware(req, res, next) {
     return res.status(400).send("Dados Inválidos");
   }
 
-
-if (temNumero.test(nome) || temNumero.test(sobrenome)) {
-  return res.status(400).send("Nome ou Sobrenome Inválidos");
-}
+  if (temNumero.test(nome) || temNumero.test(sobrenome)) {
+    return res.status(400).send("Nome ou Sobrenome Inválidos");
+  }
 
   if (senha.length < 8) {
     return res.status(400).send("A senha deve conter pelo menos 8 caracteres");
@@ -25,18 +23,27 @@ if (temNumero.test(nome) || temNumero.test(sobrenome)) {
     return res.status(400).send("Email Inválido");
   }
 
-  next();
+  try {
+    next();
+  } catch (error) {
+    return res.status(500).json({ error: 'Erro ao processar solicitação' });
+  }
 }
 
 async function getUserMiddleware(req, res, next) {
   const { id } = req.params;
-  const user = await usersModel.getUserByIdModel(id);
 
-  if (!user) {
-    return res.status(404).send("Usuário não encontrado");
+  try {
+    const user = await usersModel.getUserByIdModel(id);
+
+    if (!user) {
+      return res.status(404).send("Usuário não encontrado");
+    }
+
+    next();
+  } catch (error) {
+    return res.status(500).json({ error: 'Erro ao buscar usuário' });
   }
-
-  next();
 }
 
 async function updateUserMiddleware(req, res, next) {
@@ -47,15 +54,19 @@ async function updateUserMiddleware(req, res, next) {
     return res.status(400).send("Dados incompletos");
   }
 
-  const user = await usersModel.getUserByIdModel(id);
+  try {
+    const user = await usersModel.getUserByIdModel(id);
 
-  if (!user) {
-    return res.status(404).send({
-      message: "Usuário não encontrado",
-    });
+    if (!user) {
+      return res.status(404).send({
+        message: "Usuário não encontrado",
+      });
+    }
+
+    next();
+  } catch (error) {
+    return res.status(500).json({ error: 'Erro ao atualizar usuário' });
   }
-
-  next();
 }
 
 async function deleteUserMiddleware(req, res, next) {
@@ -65,15 +76,19 @@ async function deleteUserMiddleware(req, res, next) {
     return res.status(400).send("Dados incompletos");
   }
 
-  const user = await usersModel.getUserByIdModel(id);
+  try {
+    const user = await usersModel.getUserByIdModel(id);
 
-  if (!user) {
-    return res.status(404).send({
-      message: "Usuário não encontrado",
-    });
+    if (!user) {
+      return res.status(404).send({
+        message: "Usuário não encontrado",
+      });
+    }
+
+    next();
+  } catch (error) {
+    return res.status(500).json({ error: 'Erro ao excluir usuário' });
   }
-
-  next();
 }
 
 module.exports = {

@@ -16,7 +16,6 @@ function decryptedPassword (password) {
         .digest ('base64')
         .substr (0, 32)
 
-    // const [ivHex, encryptedHex] = password.split (':')
     const parts = password.split(':')
 
     if (parts.length !== 2) {
@@ -38,16 +37,6 @@ function decryptedPassword (password) {
     } catch (error) {
         throw new Error ('Erro ao descriptografar a senha: ' + error.message)
     }
-
-    // const iv = Buffer.from (ivHex, 'hex')
-    // const encrypted = Buffer.from (encryptedHex, 'hex')
-
-    // const decipher = crypto.createDecipheriv ('aes-256-cbc', hash, iv)
-
-    // let decrypted = decipher.update (encrypted)
-    // decrypted = Buffer.concat ([decrypted, decipher.final()])
-
-    // return decrypted.toString()
 }
 
 module.exports = decryptedPassword

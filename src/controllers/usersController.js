@@ -1,7 +1,6 @@
 // O que falta:
-// 1- Validação de dados
-// 2- Tratamento de erros
-// 3- Status de Resposta Consistente 
+// 1- Tratamento de erros
+// 2- Status de Resposta Consistente 
 
 const userModel = require("../models/usersModel");
 const encryptPassword = require("../helpers/encryptPassword");
@@ -13,33 +12,33 @@ async function createUser(req, res) {
 
   try {
     await userModel.insertUserModel(nome, sobrenome, email, pass);
+    return res.status(201).send("Usuário cadastrado com sucesso");
   } catch (error) {
-    return res.status(400).send(error.message);
+    return res.status(500).json({ error: 'Erro ao cadastrar usuário' });
   }
-
-  return res.status(201).send("Usuário cadastrado com sucesso");
 }
 
 async function getAllUsers(req, res) {
   try {
-    var users = await userModel.getAllUsersModel();
+    const users = await userModel.getAllUsersModel();
+    return res.status(200).json(users);
   } catch (error) {
-    return res.status(400).send(error.message);
+    return res.status(500).json({ error: 'Erro ao buscar usuários' });
   }
-
-  return res.send(users);
 }
 
 async function getUserById(req, res) {
   const { id } = req.params;
 
   try {
-    var user = await userModel.getUserByIdModel(id);
+    const user = await userModel.getUserByIdModel(id);
+    if (!user) {
+      return res.status(404).json({ error: 'Usuário não encontrado' });
+    }
+    return res.status(200).json(user);
   } catch (error) {
-    return res.status(400).send(error.message);
+    return res.status(500).json({ error: 'Erro ao buscar usuário' });
   }
-
-  return res.status(200).send(user);
 }
 
 async function updateUser(req, res) {
@@ -48,11 +47,10 @@ async function updateUser(req, res) {
 
   try {
     await userModel.updateUserModel(id, email, senha);
+    return res.status(200).send("Dados atualizados com sucesso");
   } catch (error) {
-    return res.status(400).send(error.message);
+    return res.status(500).json({ error: 'Erro ao atualizar usuário' });
   }
-
-  return res.status(201).send("Dados atualizados com sucesso");
 }
 
 async function deleteUser(req, res) {
@@ -60,11 +58,10 @@ async function deleteUser(req, res) {
 
   try {
     await userModel.deleteUserModel(id);
+    return res.status(200).send("Usuário excluído com sucesso");
   } catch (error) {
-    return res.status(400).send(error.message);
+    return res.status(500).json({ error: 'Erro ao excluir usuário' });
   }
-
-  return res.status(201).send("Usuário Excluído Com Sucesso");
 }
 
 module.exports = {
