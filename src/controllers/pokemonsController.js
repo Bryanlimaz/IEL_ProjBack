@@ -11,19 +11,19 @@ async function getAllPokemons(req, res) {
     return res.send(pokemons);
 }
 
-// async function getPokemonByID (req, res) {
-//     const { id } = req.params;
+async function getPokemonByID (req, res) {
+    const { id } = req.params;
 
-//     try {
-// // Executa a query de GET para mostrar o pokémon com o ID fornecido
-// // Utilizado a palavra reservada VAR pois a variável está inserida dentrod e um escopo de bloco, e preciso resgatá-la fora deste escopo.
-//         var pokemonID = await pokemonsModel.modelGetPokemonByID(id);
-//     } catch (error) {
-//         return res.status(400).send(error.message);
-//     }
+    try {
+// Executa a query de GET para mostrar o pokémon com o ID fornecido
+// Utilizado a palavra reservada VAR pois a variável está inserida dentrod e um escopo de bloco, e preciso resgatá-la fora deste escopo.
+        var pokemonID = await pokemonsModel.modelGetPokemonByID(id);
+    } catch (error) {
+        return res.status(400).send(error.message);
+    }
 
-//     return res.status(200).send (pokemonID);
-// }
+    return res.status(200).send (pokemonID);
+}
 
 // async function getPokemonByName (req, res) {
 //     const { nome } = req.params;
@@ -37,23 +37,23 @@ async function getAllPokemons(req, res) {
 //     return res.status(200).send (pokemonName);
 // }
 
-async function getPokemon (req, res) {
-    const { param } = req.params;
+// async function getPokemon (req, res) {
+//     const { param } = req.params;
 
-    try {
-        var pokemon;
-        if (isNaN(param)) { // Se não for um número, busca por nome
-            pokemon = await pokemonsModel.modelGetPokemonByName(param);
-        } else { // Se for um número, busca por ID
-            pokemon = await pokemonsModel.modelGetPokemonByID(param);
-        }
+//     try {
+//         var pokemon;
+//         if (isNaN(param)) { // Se não for um número, busca por nome
+//             pokemon = await pokemonsModel.modelGetPokemonByName(param);
+//         } else { // Se for um número, busca por ID
+//             pokemon = await pokemonsModel.modelGetPokemonByID(param);
+//         }
 
-    } catch (error) {
-        return res.status(400).send(error.message);
-    }
+//     } catch (error) {
+//         return res.status(400).send(error.message);
+//     }
 
-    return res.status(200).send(pokemon);
-}
+//     return res.status(200).send(pokemon);
+// }
 
 async function postPokemon (req, res) {
     const { nome, tipo, pv, custo_retirada, evolucao, img, fraqueza } = req.body;
@@ -96,9 +96,9 @@ async function deletePokemon (req, res) {
 
 module.exports = {
     getAllPokemons,
-    // getPokemonByID,
+    getPokemonByID,
     // getPokemonByName,
-    getPokemon,
+    // getPokemon,
     postPokemon,
     putPokemon,
     deletePokemon
