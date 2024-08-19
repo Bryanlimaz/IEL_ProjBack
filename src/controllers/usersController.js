@@ -1,18 +1,10 @@
-// O que falta:
-// 1- Validação de dados
-// 2- Tratamento de erros
-// 3- Status de Resposta Consistente 
-
 const userModel = require("../models/usersModel");
-const encryptPassword = require("../helpers/encryptPassword");
 
 async function createUser(req, res) {
   const { nome, sobrenome, email, senha } = req.body;
 
-  const pass = await encryptPassword(senha);
-
   try {
-    await userModel.insertUserModel(nome, sobrenome, email, pass);
+    await userModel.insertUserModel(nome, sobrenome, email, senha);
   } catch (error) {
     return res.status(400).send(error.message);
   }

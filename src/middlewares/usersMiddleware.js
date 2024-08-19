@@ -1,24 +1,21 @@
-// O que falta:
-// 1- Tratamento de Erros
-// 2- Validação de Dados 
-
 const usersModel = require("../models/usersModel");
 
 async function insertUserMiddleware(req, res, next) {
   const { nome, sobrenome, email, senha } = req.body;
-  const temNumero = /\d/
-  
+
   if (!nome || !sobrenome || !email || !senha) {
     return res.status(400).send("Dados Inválidos");
   }
 
-
-if (temNumero.test(nome) || temNumero.test(sobrenome)) {
-  return res.status(400).send("Nome ou Sobrenome Inválidos");
-}
-
   if (senha.length < 8) {
     return res.status(400).send("A senha deve conter pelo menos 8 caracteres");
+  }
+
+  const caractereEspecial = /[!@#$%^&*()_+{}\[\]:;"'<>,.?~`\\/-]/;
+  if (!caractereEspecial.test(senha)) {
+    return res
+      .status(400)
+      .send("A senha deve conter pelo menos um caractere especial");
   }
 
   if (!email.includes("@") || !email.includes(".")) {
